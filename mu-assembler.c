@@ -1,6 +1,5 @@
 #include "mu-assembler.h"
 
-/*
 // Converts a binary string to a hexadecimal string.
 void binarytohex(char* binary) {
     strtol(binary, NULL, 2);
@@ -144,9 +143,6 @@ char* getHexCode_Rformat(MIPS instruction){
    return NULL;
 }
 
-<<<<<<< HEAD
-*/
-=======
 char* getHexCode_Iformat(MIPS instruction)
 {
    return NULL;
@@ -156,21 +152,13 @@ char* getHexCode_Jformat(MIPS instruction)
    return NULL;
 }
 
->>>>>>> c52d4311a53c07bbb7d077c5e9f5511d809fc9a1
 /***************************************************************/
 /* Main function. */
 /***************************************************************/
 int main(int argc, char *argv[]){
    char prog_file [32];
    FILE * fp;
-<<<<<<< HEAD
-   char instruction [8];
-   char second [8];
-   char third [8];
-   char fourth [8];
-=======
    char instruction [32];
->>>>>>> c52d4311a53c07bbb7d077c5e9f5511d809fc9a1
 
    if(argc < 2)
    {
@@ -181,15 +169,6 @@ int main(int argc, char *argv[]){
    strcpy(prog_file, argv[1]);
 
    fp = fopen(prog_file, "r");
-<<<<<<< HEAD
-   if (fp == NULL) {
-	printf("Error: Can't open program file %s\n", prog_file);
-	exit(-1);
-   }
-      
-   while( fscanf(fp,"%s %s %s %s\n",instruction,second,third,fourth) != EOF){
-      printf("Read in: %s %s %s %s\n",instruction,second,third,fourth);
-=======
 	if (fp == NULL) {
 		printf("Error: Can't open program file %s\n", prog_file);
 		exit(-1);
@@ -197,7 +176,6 @@ int main(int argc, char *argv[]){
 
    while(fscanf(fp, "%[^\n]\n",instruction) != EOF){
       printf("Read in instruction %s\n",instruction);
->>>>>>> c52d4311a53c07bbb7d077c5e9f5511d809fc9a1
 
       // FUNCTION CALLS TO CONVERT THIS INSTRUCTION TO BINARY HERE
    }
