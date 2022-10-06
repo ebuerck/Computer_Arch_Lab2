@@ -78,7 +78,7 @@ void getfunctionCode(char * function){
         getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "LW")){
-        getHexCode_Rformat(function);
+        getHexCode_Iformat(function);
     }
 	else if(!strcmp(instruct.op, "SW")){
         getHexCode_Iformat(function);
