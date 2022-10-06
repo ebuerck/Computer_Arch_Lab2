@@ -128,6 +128,10 @@ void getfunctionCode(char * function){
     }
 }
 
+char* getHexCode_Rformat(char *){
+   
+}
+
 
 
 
