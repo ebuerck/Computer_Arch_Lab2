@@ -8,7 +8,9 @@ char* binarytohex(char* binary) {
 void getfunctionCode(MIPS function){
    //****************************** ALU INSTRUCTIONS ******************************
 	if(!strcmp(function.op, "ADD")){
+      function.funct = "20";
       getHexCode_Rformat(function);
+
 	}
 	else if(!strcmp(function.op, "ADDU")){
       getHexCode_Rformat(function);
@@ -138,8 +140,8 @@ void getfunctionCode(MIPS function){
     }
 }
 
-char* getHexCode_Rformat(char *){
-
+char* getHexCode_Rformat(MIPS instruction){
+   return NULL;
 }
 
 

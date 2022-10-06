@@ -5,19 +5,19 @@
 //**************** Helper Struct ****************
 typedef struct MIPS_INSTRUCT {
  char* op;
- int rs;
- int rt;
- int rd;
- uint32_t shamt;
+ char* rs;
+ char* rt;
+ char* rd;
+ char* shamt;
  char* funct;
- uint32_t immediate;
+ char* immediate;
  char* address;
 } MIPS;
 
 
 //**************** Helper Functions ****************
 char* binarytohex(char *);
-void  getfunctionCode(char *);
-char* getHexCode_Rformat(char *);
-char* getHexCode_Iformat(char *);
-char* getHexCode_Jformat(char *);
+void  getfunctionCode(struct MIPS_INSTRUCT);
+char* getHexCode_Rformat(struct MIPS_INSTRUCT);
+char* getHexCode_Iformat(struct MIPS_INSTRUCT);
+char* getHexCode_Jformat(struct MIPS_INSTRUCT);
