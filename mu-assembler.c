@@ -144,17 +144,39 @@ char* getHexCode_Rformat(MIPS instruction){
    return NULL;
 }
 
-
-
-
-
 /***************************************************************/
 /* Main function. */
 /***************************************************************/
 int main(int argc, char *argv[]){
-   if(argc != 3)
+   char prog_file [32];
+   FILE * fp;
+   char instruction [32];
+   char args [8];
+   char* hold;
+   int num = 20;
+   hold = instruction;
+
+   if(argc < 2)
    {
       printf("ERROR: No included input file\n");
       return -1;
    }
+
+	strcpy(prog_file, argv[1]);
+
+   fp = fopen(prog_file, "r");
+	if (fp == NULL) {
+		printf("Error: Can't open program file %s\n", prog_file);
+		exit(-1);
+	}
+
+   while(fscanf(fp, "%s %s\n",instruction,args) != EOF){
+      getline(&hold,&num,fp);
+      printf("Read in instruction %s %s\n",instruction,args);
+
+
+
+
+   }
+   fclose(fp);
 }
