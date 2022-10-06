@@ -10,7 +10,7 @@ void getfunctionCode(MIPS function){
    char *hold_ptr; 
    strcpy(function.op,func_hold);
    hold_ptr = strtok(func_hold, " ");
-   printf("func hold is %s\n", hold_ptr);
+   // printf("func hold is %s\n", hold_ptr);
 
    //****************************** ALU INSTRUCTIONS ******************************
 	if(!strcmp(function.op, "ADD")){
@@ -164,9 +164,10 @@ char* getHexCode_Jformat(MIPS instruction)
 int main(int argc, char *argv[]){
    char prog_file [32];
    FILE * fp;
-   char instruction [32];
+   char instruction[32];
+   
    //char hex[9];
-   MIPS *data = malloc(sizeof(MIPS));
+   MIPS data;
 
    if(argc < 2)
    {
@@ -182,13 +183,11 @@ int main(int argc, char *argv[]){
 		exit(-1);
 	}
 
-   while(fscanf(fp, "%[^\n]\n",instruction) != EOF){
-      printf("%s",instruction);
-      strcpy(data->op, instruction);
-      printf("test");
-      getfunctionCode(*data);
-
-      // FUNCTION CALLS TO CONVERT THIS INSTRUCTION TO BINARY HERE
+   while(fgets(instruction,32,fp) != NULL){
+      printf("%s\n",instruction);
+      strcpy(data.op, instruction);
+      printf("data.op: %s\n",data.op);
+      getfunctionCode(data);
    }
 
    fclose(fp);

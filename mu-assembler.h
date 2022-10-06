@@ -4,7 +4,7 @@
 
 //**************** Helper Struct ****************
 typedef struct MIPS_INSTRUCT {
- char* op;
+ char op[32];
  char* rs;
  char* rt;
  char* rd;
