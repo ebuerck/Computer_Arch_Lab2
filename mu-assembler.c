@@ -1,6 +1,9 @@
 #include "mu-assembler.h"
 
-
+// Converts a binary string to a hexadecimal string.
+char* binarytohex(char* binary) {
+    return strtol(binary, NULL, 2);
+}
 
 void getfunctionCode(char * function){
    //****************************** ALU INSTRUCTIONS ******************************
