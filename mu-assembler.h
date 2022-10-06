@@ -16,7 +16,7 @@ typedef struct MIPS_INSTRUCT {
 
 
 //**************** Helper Functions ****************
-char* binarytohex(char *);
+void binarytohex(char *);
 void  getfunctionCode(struct MIPS_INSTRUCT);
 char* getHexCode_Rformat(struct MIPS_INSTRUCT);
 char* getHexCode_Iformat(struct MIPS_INSTRUCT);

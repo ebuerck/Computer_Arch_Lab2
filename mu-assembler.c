@@ -1,8 +1,8 @@
 #include "mu-assembler.h"
 
 // Converts a binary string to a hexadecimal string.
-char* binarytohex(char* binary) {
-    return strtol(binary, NULL, 2);
+void binarytohex(char* binary) {
+    strtol(binary, NULL, 2);
 }
 
 void getfunctionCode(MIPS function){
@@ -144,6 +144,15 @@ char* getHexCode_Rformat(MIPS instruction){
    return NULL;
 }
 
+char* getHexCode_Iformat(MIPS instruction)
+{
+   return NULL;
+}
+char* getHexCode_Jformat(MIPS instruction)
+{
+   return NULL;
+}
+
 /***************************************************************/
 /* Main function. */
 /***************************************************************/
@@ -151,10 +160,6 @@ int main(int argc, char *argv[]){
    char prog_file [32];
    FILE * fp;
    char instruction [32];
-   char args [8];
-   char* hold;
-   int num = 20;
-   hold = instruction;
 
    if(argc < 2)
    {
@@ -170,12 +175,8 @@ int main(int argc, char *argv[]){
 		exit(-1);
 	}
 
-   while(fscanf(fp, "%s %s\n",instruction,args) != EOF){
-      getline(&hold,&num,fp);
-      printf("Read in instruction %s %s\n",instruction,args);
-
-
-
+   while(fscanf(fp, "%[^\n]\n",instruction) != EOF){
+      printf("Read in instruction %s\n",instruction);
 
    }
    fclose(fp);
