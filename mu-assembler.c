@@ -75,56 +75,66 @@ void getfunctionCode(char * function){
 	}
 	//****************************** Load/Store INSTRUCTIONS ******************************
 	else if(!strcmp(instruct.op, "LUI")){
+        getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "LW")){
-	}
+        getHexCode_Rformat(function);
+    }
 	else if(!strcmp(instruct.op, "SW")){
+        getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "LB")){
+        getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "LH")){
+        getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "SB")){
+        getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "SH")){
+        getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "MFHI")){
+        getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "MFLO")){
+        getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "MTHI")){
+        getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "MTLO")){
+        getHexCode_Rformat(function);
 	}
 
 	//******************************* Control Flow INSTRUCTIONS *************************** BEQ, BNE, BLEZ, BLTZ, BGEZ, BGTZ, J, JR, JAL,JALR
     else if(!strcmp(instruct.op, "BEQ")) {
-		 
+        getHexCode_Jformat(function);
     }
     else if(!strcmp(instruct.op, "BNE")) {
-		 
+        getHexCode_Jformat(function);
     }
     else if(!strcmp(instruct.op, "BLEZ")) {
-		 
+        getHexCode_Jformat(function);
     }
     else if(!strcmp(instruct.op, "BGEZ")) {
-		 
+        getHexCode_Jformat(function);
     }
     else if(!strcmp(instruct.op, "BGTZ")) {
-
+        getHexCode_Jformat(function);
     }
-
-    
 	else if(!strcmp(instruct.op, "J")) {
+        getHexCode_Jformat(function);
     }
     else if(!strcmp(instruct.op, "JR")) {
-
+        getHexCode_Jformat(function);
     }
     else if(!strcmp(instruct.op, "JAL")) {
-
+        getHexCode_Jformat(function);
     }
     else if(!strcmp(instruct.op, "JALR")) {
-		
+        getHexCode_Jformat(function);
     }
 }
 
