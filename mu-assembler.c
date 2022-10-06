@@ -5,131 +5,131 @@ char* binarytohex(char* binary) {
     return strtol(binary, NULL, 2);
 }
 
-void getfunctionCode(char * function){
+void getfunctionCode(MIPS function){
    //****************************** ALU INSTRUCTIONS ******************************
-	if(!strcmp(instruct.op, "ADD")){
+	if(!strcmp(function.op, "ADD")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "ADDU")){
+	else if(!strcmp(function.op, "ADDU")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "ADDI")){
+	else if(!strcmp(function.op, "ADDI")){
       getHexCode_Iformat(function);
 	}
-	else if(!strcmp(instruct.op, "ADDIU")){
+	else if(!strcmp(function.op, "ADDIU")){
       getHexCode_Iformat(function);
 	}
-	else if(!strcmp(instruct.op, "SUB")){
+	else if(!strcmp(function.op, "SUB")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "SUBU")){
+	else if(!strcmp(function.op, "SUBU")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "MULT")){
+	else if(!strcmp(function.op, "MULT")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "MULTU")){
+	else if(!strcmp(function.op, "MULTU")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "DIV")){
+	else if(!strcmp(function.op, "DIV")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "DIVU")){
+	else if(!strcmp(function.op, "DIVU")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "AND")){
+	else if(!strcmp(function.op, "AND")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "ANDI")){
+	else if(!strcmp(function.op, "ANDI")){
       getHexCode_Iformat(function);
 	}
-	else if(!strcmp(instruct.op, "OR")){
+	else if(!strcmp(function.op, "OR")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "ORI")){
+	else if(!strcmp(function.op, "ORI")){
       getHexCode_Iformat(function);
 	}
-	else if(!strcmp(instruct.op, "XOR")){
+	else if(!strcmp(function.op, "XOR")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "XORI")){
+	else if(!strcmp(function.op, "XORI")){
       getHexCode_Iformat(function);
 	}
-	else if(!strcmp(instruct.op, "NOR")){
+	else if(!strcmp(function.op, "NOR")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "SLT")){
+	else if(!strcmp(function.op, "SLT")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "SLTI")){
+	else if(!strcmp(function.op, "SLTI")){
       getHexCode_Iformat(function);
 	}
-	else if(!strcmp(instruct.op, "SLL")){
+	else if(!strcmp(function.op, "SLL")){
       getHexCode_Rformat(function);
 	}
-	else if(!strcmp(instruct.op, "SRL")){
+	else if(!strcmp(function.op, "SRL")){
       getHexCode_Rformat(function);
    }
-	else if(!strcmp(instruct.op, "SRA")){
+	else if(!strcmp(function.op, "SRA")){
       getHexCode_Rformat(function);
 	}
 	//****************************** Load/Store INSTRUCTIONS ******************************
-	else if(!strcmp(instruct.op, "LUI")){
+	else if(!strcmp(function.op, "LUI")){
 	}
-	else if(!strcmp(instruct.op, "LW")){
+	else if(!strcmp(function.op, "LW")){
 	}
-	else if(!strcmp(instruct.op, "SW")){
+	else if(!strcmp(function.op, "SW")){
 	}
-	else if(!strcmp(instruct.op, "LB")){
+	else if(!strcmp(function.op, "LB")){
 	}
-	else if(!strcmp(instruct.op, "LH")){
+	else if(!strcmp(function.op, "LH")){
 	}
-	else if(!strcmp(instruct.op, "SB")){
+	else if(!strcmp(function.op, "SB")){
 	}
-	else if(!strcmp(instruct.op, "SH")){
+	else if(!strcmp(function.op, "SH")){
 	}
-	else if(!strcmp(instruct.op, "MFHI")){
+	else if(!strcmp(function.op, "MFHI")){
 	}
-	else if(!strcmp(instruct.op, "MFLO")){
+	else if(!strcmp(function.op, "MFLO")){
 	}
-	else if(!strcmp(instruct.op, "MTHI")){
+	else if(!strcmp(function.op, "MTHI")){
 	}
-	else if(!strcmp(instruct.op, "MTLO")){
+	else if(!strcmp(function.op, "MTLO")){
 	}
 
 	//******************************* Control Flow INSTRUCTIONS *************************** BEQ, BNE, BLEZ, BLTZ, BGEZ, BGTZ, J, JR, JAL,JALR
-    else if(!strcmp(instruct.op, "BEQ")) {
+    else if(!strcmp(function.op, "BEQ")) {
 		 
     }
-    else if(!strcmp(instruct.op, "BNE")) {
+    else if(!strcmp(function.op, "BNE")) {
 		 
     }
-    else if(!strcmp(instruct.op, "BLEZ")) {
+    else if(!strcmp(function.op, "BLEZ")) {
 		 
     }
-    else if(!strcmp(instruct.op, "BGEZ")) {
+    else if(!strcmp(function.op, "BGEZ")) {
 		 
     }
-    else if(!strcmp(instruct.op, "BGTZ")) {
+    else if(!strcmp(function.op, "BGTZ")) {
 
     }
 
     
-	else if(!strcmp(instruct.op, "J")) {
+	else if(!strcmp(function.op, "J")) {
     }
-    else if(!strcmp(instruct.op, "JR")) {
+    else if(!strcmp(function.op, "JR")) {
 
     }
-    else if(!strcmp(instruct.op, "JAL")) {
+    else if(!strcmp(function.op, "JAL")) {
 
     }
-    else if(!strcmp(instruct.op, "JALR")) {
+    else if(!strcmp(function.op, "JALR")) {
 		
     }
 }
 
 char* getHexCode_Rformat(char *){
-   
+
 }
 
 
