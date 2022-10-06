@@ -109,7 +109,6 @@ void getfunctionCode(MIPS function){
 	else if(!strcmp(function.op, "MTLO")){
         getHexCode_Rformat(function);
 	}
-
 	//******************************* Control Flow INSTRUCTIONS *************************** BEQ, BNE, BLEZ, BLTZ, BGEZ, BGTZ, J, JR, JAL,JALR
     else if(!strcmp(function.op, "BEQ")) {
         getHexCode_Jformat(function);
