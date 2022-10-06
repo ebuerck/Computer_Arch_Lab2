@@ -8,49 +8,70 @@ char* binarytohex(char* binary) {
 void getfunctionCode(char * function){
    //****************************** ALU INSTRUCTIONS ******************************
 	if(!strcmp(instruct.op, "ADD")){
-      
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "ADDU")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "ADDI")){
+      getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "ADDIU")){
+      getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "SUB")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "SUBU")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "MULT")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "MULTU")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "DIV")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "DIVU")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "AND")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "ANDI")){
+      getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "OR")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "ORI")){
+      getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "XOR")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "XORI")){
+      getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "NOR")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "SLT")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "SLTI")){
+      getHexCode_Iformat(function);
 	}
 	else if(!strcmp(instruct.op, "SLL")){
+      getHexCode_Rformat(function);
 	}
 	else if(!strcmp(instruct.op, "SRL")){
+      getHexCode_Rformat(function);
    }
 	else if(!strcmp(instruct.op, "SRA")){
+      getHexCode_Rformat(function);
 	}
 	//****************************** Load/Store INSTRUCTIONS ******************************
 	else if(!strcmp(instruct.op, "LUI")){
