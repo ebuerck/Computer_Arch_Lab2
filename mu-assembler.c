@@ -6,6 +6,12 @@ void binarytohex(char* binary) {
 }
 
 void getfunctionCode(MIPS function){
+   char func_hold[6];
+   char *hold_ptr; 
+   strcpy(function.op,func_hold);
+   hold_ptr = strtok(func_hold, " ");
+   printf("func hold is %s\n", hold_ptr);
+
    //****************************** ALU INSTRUCTIONS ******************************
 	if(!strcmp(function.op, "ADD")){
       function.funct = "20";
@@ -159,6 +165,8 @@ int main(int argc, char *argv[]){
    char prog_file [32];
    FILE * fp;
    char instruction [32];
+   //char hex[9];
+   MIPS *data = malloc(sizeof(MIPS));
 
    if(argc < 2)
    {
@@ -175,7 +183,10 @@ int main(int argc, char *argv[]){
 	}
 
    while(fscanf(fp, "%[^\n]\n",instruction) != EOF){
-      printf("Read in instruction %s\n",instruction);
+      printf("%s",instruction);
+      strcpy(data->op, instruction);
+      printf("test");
+      getfunctionCode(*data);
 
       // FUNCTION CALLS TO CONVERT THIS INSTRUCTION TO BINARY HERE
    }
