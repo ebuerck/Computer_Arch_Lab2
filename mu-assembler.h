@@ -9,7 +9,7 @@ typedef struct MIPS_INSTRUCT {
  char* rt;
  char* rd;
  char* shamt;
- char* funct;
+ char funct[7];
  char* immediate;
  char* address;
 } MIPS;
@@ -17,7 +17,9 @@ typedef struct MIPS_INSTRUCT {
 
 //**************** Helper Functions ****************
 void binarytohex(char *);
-void  getfunctionCode(struct MIPS_INSTRUCT);
-char* getHexCode_Rformat(struct MIPS_INSTRUCT);
-char* getHexCode_Iformat(struct MIPS_INSTRUCT);
-char* getHexCode_Jformat(struct MIPS_INSTRUCT);
+void  getfunctionCode(struct MIPS_INSTRUCT *);
+char* getHexCode_Rformat(struct MIPS_INSTRUCT*);
+char* getHexCode_Iformat(struct MIPS_INSTRUCT*);
+char* getHexCode_Jformat(struct MIPS_INSTRUCT*);
+char* getRegister(char *);
+char* getShift(char *);
