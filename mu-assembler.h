@@ -5,10 +5,10 @@
 //**************** Helper Struct ****************
 typedef struct MIPS_INSTRUCT {
  char op[32];
- char* rs;
- char* rt;
- char* rd;
- char* shamt;
+ char rs[6];
+ char rt[6];
+ char rd[6];
+ char shamt[6];
  char funct[7];
  char* immediate;
  char* address;

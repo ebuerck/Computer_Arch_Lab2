@@ -199,20 +199,25 @@ char* getHexCode_Rformat(MIPS *instruction){
    char *rd;
    char shamt[6];
 
-   char * token = strtok(orginal_hold, " ");
+   strtok(orginal_hold, " ");
    rs = strtok(NULL, ", ");
    rt = strtok(NULL, ", ");
-   rd = strtok(NULL, ", ");
+   rd = strtok(NULL, ", \n");
 
    // Fill out the struct with the correct values
    strcpy(instruction->op, "000000");
-   strcpy(instruction->rs,getRegister(rs));
-   strcpy(instruction->rt,getRegister(rt));
-   strcpy(instruction->rd,getRegister(rd));
+
+   strcpy(instruction->rs, getRegister(rs));
+
+
+   strcpy(instruction->rt, getRegister(rt));
+
+   strcpy(instruction->rd, getRegister(rd));
+
    // Function code is already set
 
    // Need to take care of special cases for shamt
-   if(!strcmp(instruction->funct, "SRL") || strcmp(instruction->funct, "SLL")){
+   if(!strcmp(instruction->funct, "000010") || !strcmp(instruction->funct, "000011")){
       strcpy(instruction->shamt, getShift(shamt));
    }
    else{
@@ -233,7 +238,105 @@ char* getHexCode_Jformat(MIPS *instruction)
 
 char* getRegister(char * input)
 {
-   return NULL;
+   if(!strcmp(input, "$zero")) {
+     return "00000";
+   }
+   if(!strcmp(input, "$at")) {
+     return "00001";
+   }
+   if(!strcmp(input, "$v0")) {
+     return "00010";
+   }
+   if(!strcmp(input, "$v1")) {
+     return "00011";
+   }
+   if(!strcmp(input, "$a0")) {
+     return "00100";
+   }
+   if(!strcmp(input, "$a1")) {
+     return "00101";
+   }
+   if(!strcmp(input, "$a2")) {
+     return "00110";
+   }
+   if(!strcmp(input, "$a3")) {
+     return "00111";
+   }
+   if(!strcmp(input, "$t0")) {
+     return "01000";
+   }
+   if(!strcmp(input, "$t1")) {
+     return "01001";
+   }
+   if(!strcmp(input, "$t2")) {
+     return "01010";
+   }
+   if(!strcmp(input, "$t3")) {
+     return "01011";
+   }
+   if(!strcmp(input, "$t4")) {
+     return "01100";
+   }
+   if(!strcmp(input, "$t5")) {
+     return "01101";
+   }
+   if(!strcmp(input, "$t6")) {
+     return "01110";
+   }
+   if(!strcmp(input, "$t7")) {
+     return "01111";
+   }
+   if(!strcmp(input, "$s0")) {
+     return "10000";
+   }
+   if(!strcmp(input, "$s1")) {
+     return "10001";
+   }
+   if(!strcmp(input, "$s2")) {
+     return "10010";
+   }
+   if(!strcmp(input, "$s3")) {
+     return "10011";
+   }
+   if(!strcmp(input, "$s4")) {
+     return "10100";
+   }
+   if(!strcmp(input, "$s5")) {
+     return "10101";
+   }
+   if(!strcmp(input, "$s6")) {
+     return "10110";
+   }
+   if(!strcmp(input, "$s7")) {
+     return "10111";
+   }
+   if(!strcmp(input, "$t8")) {
+     return "11000";
+   }
+   if(!strcmp(input, "$t9")) {
+     return "11001";
+   }
+   if(!strcmp(input, "$k0")) {
+     return "11010";
+   }
+   if(!strcmp(input, "$k1")) {
+     return "11011";
+   }
+   if(!strcmp(input, "$gp")) {
+     return "11100";
+   }
+   if(!strcmp(input, "$sp")) {
+     return "11101";
+   }
+   if(!strcmp(input, "$fp")) {
+     return "11110";
+   }
+   if(!strcmp(input, "$ra")) {
+       return "11111";
+   }
+   else{
+      return "00000";
+   };
 }
 
 char* getShift(char * input )
@@ -272,7 +375,6 @@ int main(int argc, char *argv[]){
       strcpy(data.op, instruction);
       printf("data.op: %s\n",data.op);
       getfunctionCode(& data);
-      printf("AFter get function code %s\n",data.funct);
    }
 
    fclose(fp);
