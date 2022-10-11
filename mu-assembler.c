@@ -193,10 +193,16 @@ char* getHexCode_Rformat(MIPS *instruction){
    char orginal_hold[32];
    strcpy(orginal_hold, instruction->op);
 
-   char rs[6];
-   char rt[6];
-   char rd[6];
+   // split the string
+   char *rs;
+   char *rt;
+   char *rd;
    char shamt[6];
+
+   char * token = strtok(orginal_hold, " ");
+   rs = strtok(NULL, ", ");
+   rt = strtok(NULL, ", ");
+   rd = strtok(NULL, ", ");
 
    // Fill out the struct with the correct values
    strcpy(instruction->op, "000000");

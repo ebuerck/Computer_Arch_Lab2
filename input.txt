@@ -1,8 +1,8 @@
-ADDIU $a0, $zero, 0
+ADD $a0, $T1, $T2
 ADDIU $a1, $zero, 0xA
 ADDIU $a2, $zero, 0
 ADDIU $a0, $a0, 0x1
 ADDIU $a2, $a2, 0x1
 BNE $a1, $a2, -8
-ADDIU $v0, $zero, 0xA 
+ADDIU $v0, $zero, 0xA
 syscall
