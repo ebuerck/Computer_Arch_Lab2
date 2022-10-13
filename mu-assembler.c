@@ -260,9 +260,13 @@ char* getHexCode_Iformat(MIPS *instruction){
   strtok(original_hold, " ");
   rs = strtok(NULL, ", ");
   rt = strtok(NULL, ", ");
-  immediate = strtok(NULL, ", \n");
+  immediate = strtok(NULL, "\n");
   printf("The immediate of I format is: %s\n", immediate);
+
   // Fill the struct with the proper values.
+  strcpy(instruction->rs, rs);
+  strcpy(instruction->rt, rt);
+  strcpy(instruction->immediate, immediate);
 
   return NULL;
 }
@@ -275,10 +279,12 @@ char* getHexCode_Jformat(MIPS *instruction)
   char *address;
 
   strtok(original_hold, " ");
-  address = strtok(NULL, ", \n");
+  address = strtok(NULL, "\n");
   printf("The address of J format is: %s\n", address);
+
+
   // Fill the struct with the proper values.
-  
+  strcpy(instruction->address, address);
   
   return NULL;
 }
