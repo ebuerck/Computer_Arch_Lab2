@@ -10,8 +10,8 @@ typedef struct MIPS_INSTRUCT {
  char rd[6];
  char shamt[6];
  char funct[7];
- char* immediate;
- char* address;
+ char immediate[17];
+ char* address[27];
 } MIPS;
 
 
