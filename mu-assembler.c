@@ -203,7 +203,7 @@ char* getHexCode_Rformat(MIPS *instruction){
    rs = strtok(NULL, ", ");
    rt = strtok(NULL, ", ");
    rd = strtok(NULL, ", \n");
-   printf("rs: %s rt: %s rd: %s\n",rs,rt,rd);
+   printf("\nrs: %s rt: %s rd: %s\n",rs,rt,rd);
 
    // Fill out the struct with the correct values
    strcpy(instruction->op, "000000");
@@ -213,6 +213,7 @@ char* getHexCode_Rformat(MIPS *instruction){
 
    strcpy(instruction->rt, getRegister(rt));
 
+   printf("the rd value is %s and returned is %s\n",rd, getRegister(rd) );
    strcpy(instruction->rd, getRegister(rd));
 
    instruction->format = 'R';
@@ -232,10 +233,12 @@ char* getHexCode_Rformat(MIPS *instruction){
 
 char* getHexCode_Iformat(MIPS *instruction)
 {
+   instruction->format = 'I';
    return NULL;
 }
 char* getHexCode_Jformat(MIPS *instruction)
 {
+   instruction->format = 'J';
    return NULL;
 }
 
@@ -347,6 +350,9 @@ char* getShift(char * input )
    return NULL;
 }
 
+void writeToFile(MIPS instruction, FILE * fptr){
+      fprintf("");
+}
 
 /***************************************************************/
 /* Main function. */
@@ -354,6 +360,7 @@ char* getShift(char * input )
 int main(int argc, char *argv[]){
    char prog_file [32];
    FILE * fp;
+   File * output_fp;
    char instruction[32];
 
    //char hex[9];
@@ -368,7 +375,8 @@ int main(int argc, char *argv[]){
    strcpy(prog_file, argv[1]);
 
    fp = fopen(prog_file, "r");
-	if (fp == NULL) {
+   output_fp = fopen("output.txt", "w");
+	if (fp == NULL || output_fp == NULL) {
 		printf("Error: Can't open program file %s\n", prog_file);
 		exit(-1);
 	}
@@ -378,9 +386,8 @@ int main(int argc, char *argv[]){
       strcpy(data.op, instruction);
       //printf("data.op: %s\n",data.op);
       getfunctionCode(& data);
-      printf("\ndata.op: %s data.rs: %s data.rt: %s data.rd: %s \ndata.shamt: %s data.funct: %s \ndata.immediate: %s data.address: %s\n data.format: %s",data.op,data.rs,data.rt,data.rd,data.shamt,data.funct,data.immediate,data.address);  
+      writeToFile(data,output_fp);
    }
-   
-
+   fclose(output_fp);
    fclose(fp);
 }
