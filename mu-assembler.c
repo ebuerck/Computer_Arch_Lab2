@@ -209,7 +209,7 @@ char* getHexCode_Rformat(MIPS *instruction){
       rd = strtok(NULL, ", ");
       rt = strtok(NULL, ", ");
       shamt = strtok(NULL, ", \n");
-      strcpy(instruction->shamt, getShift(shamt));
+      strcpy(instruction->shamt, shamt);
 
       strcpy(instruction->rs, "00000");
 
@@ -260,7 +260,7 @@ char* getHexCode_Iformat(MIPS *instruction){
   strtok(original_hold, " ");
   rs = strtok(NULL, ", ");
   rt = strtok(NULL, ", ");
-  
+
   // Fill the struct with the proper values.
   if (!strcmp(original_hold, "ADDI")) {
     strcpy(instruction->op, "001000");
