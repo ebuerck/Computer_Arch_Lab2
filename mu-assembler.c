@@ -279,6 +279,7 @@ char* getHexCode_Jformat(MIPS *instruction)
   printf("The address of J format is: %s\n", address);
   // Fill the struct with the proper values.
   
+  
   return NULL;
 }
 
