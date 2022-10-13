@@ -11,8 +11,8 @@ typedef struct MIPS_INSTRUCT {
  char rd[6];
  char shamt[6];
  char funct[7];
- char* immediate;
- char* address;
+ char immediate[17];
+ char address[27];
  char format;
 } MIPS;
 
@@ -24,4 +24,3 @@ char* getHexCode_Rformat(struct MIPS_INSTRUCT*);
 char* getHexCode_Iformat(struct MIPS_INSTRUCT*);
 char* getHexCode_Jformat(struct MIPS_INSTRUCT*);
 char* getRegister(char *);
-char* getShift(char *);
