@@ -199,28 +199,7 @@ char* getHexCode_Rformat(MIPS *instruction){
    char *rs;
    char *rt;
    char *rd;
-<<<<<<< HEAD
-   char shamt[6];
-
-   strtok(orginal_hold, " ");
-   rs = strtok(NULL, ", ");
-   rt = strtok(NULL, ", ");
-   rd = strtok(NULL, ", \n");
-   printf("\nrs: %s rt: %s rd: %s\n",rs,rt,rd);
-
-   // Fill out the struct with the correct values
-   strcpy(instruction->op, "000000");
-
-   strcpy(instruction->rs, getRegister(rs));
-
-
-   strcpy(instruction->rt, getRegister(rt));
-=======
    char *shamt;
-   char hex_output[9];
-   char bi_output[33] = "";
->>>>>>> 2251ffa56561b525979d78d28ec58bf26eadbcc9
-
 
    instruction->format = 'R';
 
@@ -251,22 +230,6 @@ char* getHexCode_Rformat(MIPS *instruction){
 
       strcpy(instruction->rd, getRegister(rd));
    }
-
-   printf("bi output is %s\n", bi_output);
-   // Put the binary string together
-   strncat(bi_output, instruction->op, 6);
-   printf("%s\n",bi_output );
-   strncat(bi_output, instruction->rs, 5);
-   strncat(bi_output, instruction->rt, 5);
-   strncat(bi_output, instruction->rd, 5);
-   strncat(bi_output, instruction->shamt, 5);
-   strncat(bi_output, instruction->funct, 6);
-   printf("testste\n" );
-   printf("the binady is %s\n",bi_output);
-   long int test = strtol(bi_output,NULL,2);
-   printf("the hex is %lx\n",test );
-
-
    return NULL;
 }
 
@@ -390,7 +353,37 @@ char* getShift(char * input )
 }
 
 void writeToFile(MIPS instruction, FILE * fptr){
-      fprintf("");
+   char bi_output[33] = "";
+
+   // Put the binary string together
+   if(instruction.format == 'R'){
+      strncat(bi_output, instruction.op, 6);
+      strncat(bi_output, instruction.rs, 5);
+      strncat(bi_output, instruction.rt, 5);
+      strncat(bi_output, instruction.rd, 5);
+      strncat(bi_output, instruction.shamt, 5);
+      strncat(bi_output, instruction.funct, 6);
+      printf("\nThe binady is %s\n",bi_output);
+      long int hex = strtol(bi_output,NULL,2);
+      printf("\nThe hex is %08lx\n",hex);
+      fprintf(fptr,"%08lx\n",hex);
+   }
+   if(instruction.format == 'I'){
+      strncat(bi_output, instruction.op, 6);
+      strncat(bi_output, instruction.rs, 5);
+      strncat(bi_output, instruction.rt, 5);
+      strncat(bi_output, instruction.immediate,16);
+      long int hex = strtol(bi_output,NULL,2);
+      printf("\nThe hex is %08lx\n",hex);
+      fprintf(fptr,"%08lx\n",hex);
+   } 
+   if(instruction.format == 'J'){
+      strncat(bi_output, instruction.op, 6);
+      strncat(bi_output, instruction.address, 26);
+      long int hex = strtol(bi_output,NULL,2);
+      printf("\nThe hex is %08lx\n",hex);
+      fprintf(fptr,"%08lx\n",hex);
+   }
 }
 
 /***************************************************************/
@@ -399,7 +392,7 @@ void writeToFile(MIPS instruction, FILE * fptr){
 int main(int argc, char *argv[]){
    char prog_file [32];
    FILE * fp;
-   File * output_fp;
+   FILE * output_fp;
    char instruction[32];
 
    //char hex[9];
