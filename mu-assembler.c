@@ -192,11 +192,14 @@ char* getHexCode_Rformat(MIPS *instruction){
    // create a copy of the instructions
    char orginal_hold[32];
    strcpy(orginal_hold, instruction->op);
+   strtok(orginal_hold, " ");
+
 
    // split the string
    char *rs;
    char *rt;
    char *rd;
+<<<<<<< HEAD
    char shamt[6];
 
    strtok(orginal_hold, " ");
@@ -212,21 +215,57 @@ char* getHexCode_Rformat(MIPS *instruction){
 
 
    strcpy(instruction->rt, getRegister(rt));
+=======
+   char *shamt;
+   char hex_output[9];
+   char bi_output[33] = "";
+>>>>>>> 2251ffa56561b525979d78d28ec58bf26eadbcc9
 
-   printf("the rd value is %s and returned is %s\n",rd, getRegister(rd) );
-   strcpy(instruction->rd, getRegister(rd));
 
    instruction->format = 'R';
 
-   // Function code is already set
+   strcpy(instruction->op, "000000");
 
    // Need to take care of special cases for shamt
    if(!strcmp(instruction->funct, "000010") || !strcmp(instruction->funct, "000011")){
+      rd = strtok(NULL, ", ");
+      rt = strtok(NULL, ", ");
+      shamt = strtok(NULL, ", \n");
       strcpy(instruction->shamt, getShift(shamt));
+
+      strcpy(instruction->rs, "00000");
+
+      strcpy(instruction->rt, getRegister(rt));
+
+      strcpy(instruction->rd, getRegister(rd));
    }
    else{
+      rd = strtok(NULL, ", ");
+      rs = strtok(NULL, ", ");
+      rt = strtok(NULL, ", \n");
       strcpy(instruction->shamt, "00000");
+
+      strcpy(instruction->rs, getRegister(rs));
+
+      strcpy(instruction->rt, getRegister(rt));
+
+      strcpy(instruction->rd, getRegister(rd));
    }
+
+   printf("bi output is %s\n", bi_output);
+   // Put the binary string together
+   strncat(bi_output, instruction->op, 6);
+   printf("%s\n",bi_output );
+   strncat(bi_output, instruction->rs, 5);
+   strncat(bi_output, instruction->rt, 5);
+   strncat(bi_output, instruction->rd, 5);
+   strncat(bi_output, instruction->shamt, 5);
+   strncat(bi_output, instruction->funct, 6);
+   printf("testste\n" );
+   printf("the binady is %s\n",bi_output);
+   long int test = strtol(bi_output,NULL,2);
+   printf("the hex is %lx\n",test );
+
 
    return NULL;
 }
