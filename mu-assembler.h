@@ -22,4 +22,3 @@ char* getHexCode_Rformat(struct MIPS_INSTRUCT*);
 char* getHexCode_Iformat(struct MIPS_INSTRUCT*);
 char* getHexCode_Jformat(struct MIPS_INSTRUCT*);
 char* getRegister(char *);
-char* getShift(char *);

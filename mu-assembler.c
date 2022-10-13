@@ -200,10 +200,7 @@ char* getHexCode_Rformat(MIPS *instruction){
    char *rt;
    char *rd;
    char *shamt;
-   char hex_output[9];
    char bi_output[33] = "";
-
-
 
    strcpy(instruction->op, "000000");
 
@@ -362,11 +359,6 @@ char* getRegister(char * input)
    else{
       return "00000";
    };
-}
-
-char* getShift(char * input )
-{
-   return NULL;
 }
 
 
