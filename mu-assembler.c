@@ -251,9 +251,44 @@ char* getHexCode_Rformat(MIPS *instruction){
    return NULL;
 }
 
-char* getHexCode_Iformat(MIPS *instruction)
-{
+char* getHexCode_Iformat(MIPS *instruction){
   char original_hold[32];
+  strcpy(original_hold, instruction->op);
+
+  // Split the string.
+  char *rs;
+  char *rt;
+  char immediate[16];
+
+  strtok(original_hold, " ");
+  rs = strtok(NULL, ", ");
+  rt = strtok(NULL, ", ");
+  
+  // Fill the struct with the proper values.
+  if (!strcmp(original_hold, "ADDI")) {
+    strcpy(instruction->op, "001000");
+  } else if (!strcmp(original_hold, "ADDIU")) {
+    strcpy(instruction->op, "001001");
+  } else if (!strcmp(original_hold, "ANDI")) {
+    strcpy(instruction->op, "001100");
+  } else if (!strcmp(original_hold, "BEQ")) {
+    strcpy(instruction->op, "000100");
+  } else if (!strcmp(original_hold, "BNE")) {
+    strcpy(instruction->op, "000101");
+  } else if (!strcmp(original_hold, "LBU")) {
+    strcpy(instruction->op, "100100");
+  } else if (!strcmp(original_hold, "LHU")) {
+    strcpy(instruction->op, "100101");
+  } else if (!strcmp(original_hold, "LL")) {
+    strcpy(instruction->op, "110000");
+  } else if (!strcmp(original_hold, "LUI")) {
+    strcpy(instruction->op, "001111");
+  } else if (!strcmp(original_hold, "LW")) {
+    strcpy(instruction->op, "100011");
+  }
+
+
+
   return NULL;
 }
 char* getHexCode_Jformat(MIPS *instruction)
