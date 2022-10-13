@@ -11,7 +11,7 @@ typedef struct MIPS_INSTRUCT {
  char shamt[6];
  char funct[7];
  char immediate[17];
- char* address[27];
+ char address[27];
 } MIPS;
 
 
