@@ -212,7 +212,9 @@ char* getHexCode_Rformat(MIPS *instruction){
 
    strcpy(instruction->rt, getRegister(rt));
 
+   printf("the rd value is %s and returned is %s\n",rd, getRegister(rd) );
    strcpy(instruction->rd, getRegister(rd));
+
 
    // Function code is already set
 
@@ -365,7 +367,8 @@ int main(int argc, char *argv[]){
    strcpy(prog_file, argv[1]);
 
    fp = fopen(prog_file, "r");
-	if (fp == NULL) {
+   FILE * output_fp = fopen("output.txt", "w");
+	if (fp == NULL || output_fp == NULL) {
 		printf("Error: Can't open program file %s\n", prog_file);
 		exit(-1);
 	}
@@ -375,6 +378,7 @@ int main(int argc, char *argv[]){
       strcpy(data.op, instruction);
       printf("data.op: %s\n",data.op);
       getfunctionCode(& data);
+      printf("the rd value is %s and returned is\n",data.rd);
    }
 
    fclose(fp);
