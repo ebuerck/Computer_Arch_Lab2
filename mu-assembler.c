@@ -231,11 +231,12 @@ char* getHexCode_Rformat(MIPS *instruction){
 
 char* getHexCode_Iformat(MIPS *instruction)
 {
-   return NULL;
+  char original_hold[32];
+  return NULL;
 }
 char* getHexCode_Jformat(MIPS *instruction)
 {
-   return NULL;
+    return NULL;
 }
 
 char* getRegister(char * input)
