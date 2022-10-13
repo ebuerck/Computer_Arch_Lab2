@@ -152,23 +152,23 @@ void getfunctionCode(MIPS *function){
 	//******************************* Control Flow INSTRUCTIONS *************************** BEQ, BNE, BLEZ, BLTZ, BGEZ, BGTZ, J, JR, JAL,JALR
     else if(!strcmp(func_hold, "BEQ")) {
       strcpy(function->funct, "000100");
-        getHexCode_Jformat(function);
+        getHexCode_Iformat(function);
     }
     else if(!strcmp(func_hold, "BNE")) {
       strcpy(function->funct, "000101");
-        getHexCode_Jformat(function);
+        getHexCode_Iformat(function);
     }
     else if(!strcmp(func_hold, "BLEZ")) {
       strcpy(function->funct, "000110");
-        getHexCode_Jformat(function);
+        getHexCode_Iformat(function);
     }
     else if(!strcmp(func_hold, "BGEZ")) {
       strcpy(function->funct, "000001");
-      getHexCode_Jformat(function);
+      getHexCode_Iformat(function);
     }
     else if(!strcmp(func_hold, "BGTZ")) {
       strcpy(function->funct, "000111");
-      getHexCode_Jformat(function);
+      getHexCode_Iformat(function);
     }
 	else if(!strcmp(func_hold, "J")) {
       strcpy(function->funct, "000010");
@@ -176,7 +176,7 @@ void getfunctionCode(MIPS *function){
     }
     else if(!strcmp(func_hold, "JR")) {
       strcpy(function->funct, "001000");
-      getHexCode_Jformat(function);
+      getHexCode_Rformat(function);
     }
     else if(!strcmp(func_hold, "JAL")) {
       strcpy(function->funct, "000011");
@@ -184,7 +184,7 @@ void getfunctionCode(MIPS *function){
     }
     else if(!strcmp(func_hold, "JALR")) {
       strcpy(function->funct, "001001");
-      getHexCode_Jformat(function);
+      getHexCode_Rformat(function);
     }
 }
 
@@ -266,6 +266,13 @@ char* getHexCode_Jformat(MIPS *instruction)
 
   strtok(original_hold, " ");
   address = strtok(NULL, ", \n");
+  char hold[29];
+
+  for(int i=0;hex_to_binary(address[i])!= '\0';i++){
+      
+      strncat(hold,hex_to_binary(address[i]),4);
+  }
+  strncpy(instruction->address,hold,27);
   instruction->format = 'J';
   printf("The address of J format is: %s\n", address);
 
@@ -390,30 +397,70 @@ void writeToFile(MIPS instruction, FILE * fptr){
       strncat(bi_output, instruction.rd, 5);
       strncat(bi_output, instruction.shamt, 5);
       strncat(bi_output, instruction.funct, 6);
-      printf("\nThe binady is %s\n",bi_output);
       long int hex = strtol(bi_output,NULL,2);
-      printf("\nThe hex is %08lx\n",hex);
       fprintf(fptr,"%08lx\n",hex);
    }
    if(instruction.format == 'I'){
-      strncat(bi_output, instruction.op, 6);
-      strncat(bi_output, instruction.rs, 5);
+      strncat(bi_output, instruction.funct, 6);
       strncat(bi_output, instruction.rt, 5);
+      strncat(bi_output, instruction.rs, 5);
       long int imm = strtol(instruction.immediate,NULL,10);
-      // strncat(bi_output, instruction.immediate,16);
-      printf("\nThe binady is %s\n",bi_output);
       long int hex = strtol(bi_output,NULL,2);
-      printf("\nThe hex is %08lx%lx\n",hex,imm);
-      fprintf(fptr,"%08lx\n",hex);
+      fprintf(fptr,"%lx%04lx\n",hex,imm);
    } 
    if(instruction.format == 'J'){
-      strncat(bi_output, instruction.op, 6);
+      strncat(bi_output, instruction.funct, 6);
       strncat(bi_output, instruction.address, 26);
-      printf("\nThe binady is %s\n",bi_output);
       long int hex = strtol(bi_output,NULL,2);
-      printf("\nThe hex is %08lx\n",hex);
-      fprintf(fptr,"%08lx\n",hex);
+      fprintf(fptr,"%lx%\n",hex);
    }
+}
+
+char* hex_to_binary(char Hexdigit)
+{
+	if(isalpha(Hexdigit))
+		Hexdigit = toupper(Hexdigit);
+
+	switch (Hexdigit)
+	{
+	case ' ':
+		return "0000";
+	case '0':
+		return "0000";
+	case '1':
+		return "0001";
+	case '2':
+		return "0010";
+	case '3':
+		return "0011";
+	case '4':
+		return "0100";
+	case '5':
+		return "0101";
+	case '6':
+		return "0110";
+	case '7':
+		return "0111";
+	case '8':
+		return "1000";
+	case '9':
+		return "1001";
+	case 'A':
+		return "1010";
+	case 'B':
+		return "1011";
+	case 'C':
+		return "1100";
+	case 'D':
+		return "1101";
+	case 'E':
+		return "1110";
+	case 'F':
+		return "1111";
+	default:
+		return "\0";
+		break;
+	}
 }
 
 /***************************************************************/
