@@ -10,7 +10,7 @@ void getfunctionCode(MIPS *function){
    char func_hold[7];
    strncpy(func_hold, function->op, 6);
    strtok(func_hold, " ");
-   printf("func hold is %s\n", func_hold);
+   printf("\nfunc hold is %s", func_hold);
 
 
 
@@ -203,6 +203,7 @@ char* getHexCode_Rformat(MIPS *instruction){
    rs = strtok(NULL, ", ");
    rt = strtok(NULL, ", ");
    rd = strtok(NULL, ", \n");
+   printf("rs: %s rt: %s rd: %s\n",rs,rt,rd);
 
    // Fill out the struct with the correct values
    strcpy(instruction->op, "000000");
@@ -213,6 +214,8 @@ char* getHexCode_Rformat(MIPS *instruction){
    strcpy(instruction->rt, getRegister(rt));
 
    strcpy(instruction->rd, getRegister(rd));
+
+   instruction->format = 'R';
 
    // Function code is already set
 
@@ -373,9 +376,11 @@ int main(int argc, char *argv[]){
    while(fgets(instruction,32,fp) != NULL){
       //printf("%s\n",instruction);
       strcpy(data.op, instruction);
-      printf("data.op: %s\n",data.op);
+      //printf("data.op: %s\n",data.op);
       getfunctionCode(& data);
+      printf("\ndata.op: %s data.rs: %s data.rt: %s data.rd: %s \ndata.shamt: %s data.funct: %s \ndata.immediate: %s data.address: %s\n data.format: %s",data.op,data.rs,data.rt,data.rd,data.shamt,data.funct,data.immediate,data.address);  
    }
+   
 
    fclose(fp);
 }

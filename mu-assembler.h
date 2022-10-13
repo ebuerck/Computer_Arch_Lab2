@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 //**************** Helper Struct ****************
 typedef struct MIPS_INSTRUCT {
  char op[32];
@@ -12,6 +13,7 @@ typedef struct MIPS_INSTRUCT {
  char funct[7];
  char* immediate;
  char* address;
+ char format;
 } MIPS;
 
 
