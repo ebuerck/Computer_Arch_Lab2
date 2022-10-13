@@ -248,7 +248,11 @@ char* getHexCode_Iformat(MIPS *instruction){
   immediate = strtok(NULL, ", \n");
   instruction->format = 'I';
   printf("The immediate of I format is: %s\n", immediate);
+
   // Fill the struct with the proper values.
+  strcpy(instruction->rs, getRegister(rs));
+  strcpy(instruction->rt, getRegister(rt));
+  strcpy(instruction->immediate, immediate);
 
   return NULL;
 }
@@ -264,8 +268,10 @@ char* getHexCode_Jformat(MIPS *instruction)
   address = strtok(NULL, ", \n");
   instruction->format = 'J';
   printf("The address of J format is: %s\n", address);
+
+
   // Fill the struct with the proper values.
-  
+  strcpy(instruction->address, address);
   
   return NULL;
 }
@@ -393,10 +399,11 @@ void writeToFile(MIPS instruction, FILE * fptr){
       strncat(bi_output, instruction.op, 6);
       strncat(bi_output, instruction.rs, 5);
       strncat(bi_output, instruction.rt, 5);
-      strncat(bi_output, instruction.immediate,16);
+      long int imm = strtol(instruction.immediate,NULL,10);
+      // strncat(bi_output, instruction.immediate,16);
       printf("\nThe binady is %s\n",bi_output);
       long int hex = strtol(bi_output,NULL,2);
-      printf("\nThe hex is %08lx\n",hex);
+      printf("\nThe hex is %08lx%lx\n",hex,imm);
       fprintf(fptr,"%08lx\n",hex);
    } 
    if(instruction.format == 'J'){
