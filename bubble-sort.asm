@@ -26,9 +26,9 @@ END:
     SYSCALL
 
 SWAP:
-    LI          $S4,        $S2                             # TEMP = ARRAY + J
-    LI          $S2,        $S3                             # ARRAY + J = ARRAY + J + 1
-    LI          $S3,        $S4                             # ARRAY + J + 1 = TEMP
+    LI          $S4,            $S2                         # TEMP = ARRAY + J
+    LI          $S2,            $S3                         # ARRAY + J = ARRAY + J + 1
+    LI          $S3,            $S4                         # ARRAY + J + 1 = TEMP
     J           $RA                                         # RETURN TO INNERFOR.
 
 # void bubble(int array[], int size) {
