@@ -15,17 +15,21 @@ OUTERFOR:
 INNERFOR:
     BLE     $S0,        $T1,    OUTERFOR    $ IF SIZE <= J, RESTART OUTERFOR.
     LI      $S2,        $S1                 # $S2 = ARRAY
-    ADD     $S2,        $S2,    $T0         # $S2 = $S2 + J
+    ADD     $S2,        $S2,    $T0         # $S2 = ARRAY + J
     LI      $S3,        $S1,                # $S3 = ARRAY
-    ADD     $S3,        $S3,    $T0         # $S3 = $S3 + J
-    ADDI    $S3,        1                   # $S3 = $S3 + 1
+    ADD     $S3,        $S3,    $T0         # $S3 = ARRAY + J
+    ADDI    $S3,        1                   # $S3 = ARRAY + J + 1
     BEQ     ($S2),      ($S3)   SWAP        # IF (ARRAY[J] > ARRAY[J + 1])
     ADDI    $T1,        $T1,    1           # J = J + 1
     J       INNERFOR
 END:
+    SYSCALL
 
 SWAP:
-
+    LI      $S4,        $S2                 # TEMP = ARRAY + J
+    LI      $S2,        $S3                 # ARRAY + J = ARRAY + J + 1
+    LI      $S3,        $S4                 # ARRAY + J + 1 = TEMP
+    J       $RA                             # RETURN TO INNERFOR.
 
 
 # void bubble_sort(int a[], int n) {
@@ -42,4 +46,4 @@ SWAP:
 # }
 # $T0 = i
 # $T1 = j
-# $T2 = tmp
+# $S4 = tmp
