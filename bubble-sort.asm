@@ -11,9 +11,11 @@ OUTERFOR:
     BLE         $S0,            $T0,        END             # IF SIZE <= I, EXIT OUTERFOR.
     ADDI        $T0,            $T0,        1               # I = I + 1
     LI          $T1,            0                           # J = 0
+    LI          $S5,            10                          # $S5 = SIZE
+    SUB         $S5,            $T0                         # $S5 = SIZE - I
     J           INNERFOR
 INNERFOR:
-    BLE         $S0,            $T1,        OUTERFOR        # IF SIZE <= J, RESTART OUTERFOR.
+    BLE         $S5,            $T1,        OUTERFOR        # IF SIZE <= J, RESTART OUTERFOR.
     LI          $S2,            $S1                         # $S2 = ARRAY
     ADD         $S2,            $S2,        $T0             # $S2 = ARRAY + J
     LI          $S3,            $S1,                        # $S3 = ARRAY
@@ -50,3 +52,4 @@ SWAP:
 # $S2 = array + j
 # $S3 = array + j + 1
 # $S4 = temp
+# $S5 = size - i - 1
