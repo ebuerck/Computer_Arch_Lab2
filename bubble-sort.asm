@@ -31,19 +31,22 @@ SWAP:
     LI      $S3,        $S4                 # ARRAY + J + 1 = TEMP
     J       $RA                             # RETURN TO INNERFOR.
 
-
-# void bubble_sort(int a[], int n) {
-#     int tmp = 0;
-#     for (int i = 0; i < n; i++) {
-#         for (int j = 0; j < n - i - 1; j++) {
-#             if (a[j] > a[j + 1]) {
-#                 tmp = a[j];
-#                 a[j] = a[j + 1];
-#                 a[j + 1] = tmp;
+# void bubble(int array[], int size) {
+#     int temp = 0;
+#     for (int i = 0; i < size; ++i) {
+#         for (int j = 0; j < size - i - 1; ++j) {
+#             if (array[j] > array[j + 1]) {
+#                 temp = array[j];
+#                 array[j] = array[j + 1];
+#                 array[j + 1] = temp;
 #             }
 #         }
 #     }
 # }
 # $T0 = i
 # $T1 = j
-# $S4 = tmp
+# $S0 = size
+# $S1 = array
+# $S2 = array + j
+# $S3 = array + j + 1
+# $S4 = temp
