@@ -10,9 +10,12 @@ void getfunctionCode(MIPS *function){
    char func_hold[7];
    strncpy(func_hold, function->op, 6);
    strtok(func_hold, " ");
-   printf("\nfunc hold is %s", func_hold);
 
+   if(!strcmp(func_hold, "syscal"))
+   {
+      strcpy(function->funct, "syscal");
 
+   }
 
    //****************************** ALU INSTRUCTIONS ******************************
 	if(!strcmp(func_hold, "ADD")){
@@ -243,15 +246,31 @@ char* getHexCode_Iformat(MIPS *instruction){
   char *immediate;
 
   strtok(original_hold, " ");
-  rs = strtok(NULL, ", ");
   rt = strtok(NULL, ", ");
+  rs = strtok(NULL, ", ");
   immediate = strtok(NULL, ", \n");
   instruction->format = 'I';
-  printf("The immediate of I format is: %s\n", immediate);
 
   // Fill the struct with the proper values.
-  strcpy(instruction->rs, getRegister(rs));
-  strcpy(instruction->rt, getRegister(rt));
+  // Take care of the branching occurances
+  if(original_hold[0] == 'B'){
+     strcpy(instruction->rt, getRegister(rs));
+     if(!strcmp(original_hold, "BGTZ") || !strcmp(original_hold, "BLEZ")){
+        strcpy(instruction->rs, "00000");
+     }
+     else if( !strcmp(original_hold, "BGEZ")){
+        strcpy(instruction->rs, "00001");
+     }
+     else{
+        strcpy(instruction->rs, getRegister(rt));
+     }
+  }
+  else{
+     //non branching
+     strcpy(instruction->rs, getRegister(rs));
+     strcpy(instruction->rt, getRegister(rt));
+ }
+
   strcpy(instruction->immediate, immediate);
 
   return NULL;
@@ -268,8 +287,8 @@ char* getHexCode_Jformat(MIPS *instruction)
   address = strtok(NULL, ", \n");
   char hold[29];
 
-  for(int i=0;hex_to_binary(address[i])!= '\0';i++){
-      
+  for(int i=0; hex_to_binary(address[i])!= NULL;i++){
+
       strncat(hold,hex_to_binary(address[i]),4);
   }
   strncpy(instruction->address,hold,27);
@@ -279,7 +298,7 @@ char* getHexCode_Jformat(MIPS *instruction)
 
   // Fill the struct with the proper values.
   strcpy(instruction->address, address);
-  
+
   return NULL;
 }
 
@@ -389,6 +408,10 @@ char* getRegister(char * input)
 void writeToFile(MIPS instruction, FILE * fptr){
    char bi_output[33] = "";
 
+   if(!strcmp(instruction.funct, "syscal")){
+      fprintf(fptr,"%.8s","0000000c");
+      return;
+   }
    // Put the binary string together
    if(instruction.format == 'R'){
       strncat(bi_output, instruction.op, 6);
@@ -401,18 +424,35 @@ void writeToFile(MIPS instruction, FILE * fptr){
       fprintf(fptr,"%08lx\n",hex);
    }
    if(instruction.format == 'I'){
+      int imm;
+      char negative_hex[9];
       strncat(bi_output, instruction.funct, 6);
-      strncat(bi_output, instruction.rt, 5);
       strncat(bi_output, instruction.rs, 5);
-      long int imm = strtol(instruction.immediate,NULL,10);
+      strncat(bi_output, instruction.rt, 5);
+      // check to see if the value is negative
+      imm = strtol(instruction.immediate,NULL,10);
+
+      if(instruction.immediate[0] == '-'){
+         sprintf(negative_hex, "%x",imm);
+         long int hex = strtol(bi_output,NULL,2);
+         fprintf(fptr,"%lx%.4s\n",hex,&negative_hex[4]);
+         return;
+      }
+      else if(instruction.immediate[0] == '0' && instruction.immediate[1] == 'x'){
+         long int hex = strtol(bi_output,NULL,2);
+         imm = strtol(instruction.immediate,NULL,16);
+         fprintf(fptr,"%lx%04x\n",hex,imm);
+         return;
+      }
+
       long int hex = strtol(bi_output,NULL,2);
-      fprintf(fptr,"%lx%04lx\n",hex,imm);
-   } 
+      fprintf(fptr,"%lx%04x\n",hex,imm);
+   }
    if(instruction.format == 'J'){
       strncat(bi_output, instruction.funct, 6);
       strncat(bi_output, instruction.address, 26);
       long int hex = strtol(bi_output,NULL,2);
-      fprintf(fptr,"%lx%\n",hex);
+      fprintf(fptr,"%lx\n",hex);
    }
 }
 
@@ -458,10 +498,11 @@ char* hex_to_binary(char Hexdigit)
 	case 'F':
 		return "1111";
 	default:
-		return "\0";
+		return NULL;
 		break;
 	}
 }
+
 
 /***************************************************************/
 /* Main function. */
